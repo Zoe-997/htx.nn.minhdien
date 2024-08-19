@@ -20,7 +20,7 @@ type FieldType = {
   remember?: string;
 };
 
-const Login = () => {
+const Login: React.FC = () => {
   const router = useRouter();
   const pathname = usePathname();
   const [authenticated, setAuthenticated] = useState(false);
@@ -67,7 +67,8 @@ const Login = () => {
   }, [router]);
 
   if (authenticated && pathname === "/admin/login") {
-    return router.push("/admin/dashboard");
+    router.push("/admin/dashboard");
+    return null;
   }
 
   return (
