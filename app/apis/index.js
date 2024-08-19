@@ -36,10 +36,8 @@ export const callApi = (endPoint, method, body) => {
       (error) => {
         console.log("error: 11111", error);
         if (error?.response?.data?.code === 404) {
-          // window.location.replace("/khong-tim-thay-trang");
         } else if (error?.response?.data?.code === 401) {
           removeToken();
-          // history.push("/login")
         }
         return Promise.reject(error);
       }

@@ -1,6 +1,3 @@
-import BannerTop from "@/app/components/sections/BannerTop";
-import Introduction from "@/app/components/sections/Introduction";
-
 export async function generateMetadata() {
   return {
     title: "Minh Dien Agriculture Cooperative | Green Agriculture in Vietnam",
@@ -15,10 +12,5 @@ export async function generateMetadata() {
 }
 
 export default function AdminLayout() {
-  return (
-    <>
-      <BannerTop />
-      <Introduction />
-    </>
-  );
+  return <>admin</>;
 }

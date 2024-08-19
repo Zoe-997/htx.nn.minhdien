@@ -1,3 +1,9 @@
 import { callApi } from "@/app/apis";
 
-export const auth = {};
+const register = (form: any) => {
+  return callApi("/auth/register", "post", form);
+};
+
+export const auth = {
+  register,
+};
