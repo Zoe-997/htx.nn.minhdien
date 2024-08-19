@@ -6,7 +6,7 @@ import Footer from "@/app/components/footers/Footer";
 
 const fontBase = Nunito({ subsets: ["latin", "vietnamese"] });
 
-export default function AdminHome({
+export default function AdminLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;

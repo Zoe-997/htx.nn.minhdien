@@ -4,7 +4,7 @@ import { useRouter, usePathname } from "next/navigation";
 
 import { getToken } from "../../libs/auth";
 
-export default function AdminLayout() {
+export default function AdminHome() {
   const router = useRouter();
   const pathname = usePathname();
   const [authenticated, setAuthenticated] = useState(false);
@@ -22,7 +22,7 @@ export default function AdminLayout() {
     return router.push("/admin/login");
   }
 
-  if (pathname === "/" || pathname === "") {
+  if (pathname === "/admin") {
     return router.push("/admin/dashboard");
   }
 

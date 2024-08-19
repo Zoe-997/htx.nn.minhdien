@@ -46,7 +46,7 @@ export const callApi = (endPoint, method, body) => {
   try {
     return axios({
       method,
-      url: `${constants.API_URL}${endPoint}`,
+      url: `${constants.API_URL_DEV}${endPoint}`,
       data: body,
       headers: {
         "Content-Type": "application/json",

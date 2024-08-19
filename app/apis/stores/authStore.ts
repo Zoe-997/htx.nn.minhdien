@@ -8,6 +8,11 @@ interface AuthStore {
     onSuccess?: (data: any) => void,
     onFail?: (data: any) => void
   ) => void;
+  login: (
+    form: any,
+    onSuccess?: (data: any) => void,
+    onFail?: (data: any) => void
+  ) => void;
 }
 
 export const useAuthStore = create<AuthStore>((set) => ({
@@ -19,6 +24,17 @@ export const useAuthStore = create<AuthStore>((set) => ({
       onSuccess?.(response);
     } catch (error) {
       onFail?.(error);
+    }
+    set({ loading: false });
+  },
+
+  login: async (form, onSuccess, onFail) => {
+    try {
+      set({ loading: true });
+      const response = await RepositoryRemote.auth.login(form);
+      onSuccess?.(response?.data);
+    } catch (error: any) {
+      onFail?.(error?.response?.data);
     }
     set({ loading: false });
   },

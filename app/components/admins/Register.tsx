@@ -20,7 +20,6 @@ const Register: React.FC = () => {
   const { register, loading } = useAuthStore();
 
   const onFinish: FormProps<FieldType>["onFinish"] = (values) => {
-    console.log("Success:", values);
     const dataSubmit = {
       ...values,
       isActive: false,
