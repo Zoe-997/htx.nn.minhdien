@@ -14,9 +14,7 @@ export default function AdminHome({
   return (
     <html lang="en">
       <body className={fontBase.className}>
-        <Header />
         <main>{children}</main>
-        <Footer />
       </body>
     </html>
   );
