@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
 
-import { getToken } from "../../libs/auth";
+import { getLocalStorageToken, getSectionStorageToken } from "../../libs/auth";
 
 export default function AdminHome() {
   const router = useRouter();
@@ -11,7 +11,9 @@ export default function AdminHome() {
 
   useEffect(() => {
     const checkAuthentication = async () => {
-      const token = await getToken("user");
+      const token =
+        (await getLocalStorageToken("user")) ||
+        (await getSectionStorageToken("user"));
       setAuthenticated(token !== null);
     };
 

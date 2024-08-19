@@ -1,6 +1,6 @@
 import axios from "axios";
 import { constants } from "@/app/libs/constants";
-import { getToken } from "@/app/libs/auth";
+import { getLocalStorageToken, getSectionStorageToken } from "@/app/libs/auth";
 
 const exceptPrefix = ["/login", "/register"];
 const checkEndPoint = (endpoint) => {
@@ -16,7 +16,8 @@ export const callApi = (endPoint, method, body) => {
   if (checkEndPoint(endPoint) === false) {
     axios.interceptors.request.use(
       (config) => {
-        const token = getToken("user");
+        const token =
+          getLocalStorageToken("user") || getSectionStorageToken("user");
         if (token) {
           config.headers.Authorization = `Bearer ${token}`;
         }

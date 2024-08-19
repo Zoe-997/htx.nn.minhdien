@@ -1,12 +1,17 @@
 "use client";
-import React from "react";
-import { useRouter } from "next/navigation";
+import React, { useEffect, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
 import { Button, Checkbox, Form, Input, message, Spin } from "antd";
 import type { FormProps } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 
 import { useAuthStore } from "@/app/apis/stores/authStore";
-import { setToken } from "@/app/libs/auth";
+import {
+  getLocalStorageToken,
+  getSectionStorageToken,
+  setLocalStorageToken,
+  setSectionStorageToken,
+} from "@/app/libs/auth";
 import Logo from "../headers/Logo";
 
 type FieldType = {
@@ -15,8 +20,10 @@ type FieldType = {
   remember?: string;
 };
 
-const Login: React.FC = () => {
-  const route = useRouter();
+const Login = () => {
+  const router = useRouter();
+  const pathname = usePathname();
+  const [authenticated, setAuthenticated] = useState(false);
   const { login, loading } = useAuthStore();
 
   const onFinish: FormProps<FieldType>["onFinish"] = (values) => {
@@ -24,12 +31,14 @@ const Login: React.FC = () => {
 
     const onSuccess = (res: any) => {
       if (res) {
-        if (values.remember) {
-          setToken("user", JSON.stringify(res));
-        }
-
         message.success("Login success");
-        route.push("/admin");
+        router.push("/admin");
+
+        if (values.remember) {
+          setLocalStorageToken("user", JSON.stringify(res));
+        } else {
+          setSectionStorageToken("user", JSON.stringify(res));
+        }
       }
     };
 
@@ -45,6 +54,21 @@ const Login: React.FC = () => {
   ) => {
     console.log("Failed:", errorInfo);
   };
+
+  useEffect(() => {
+    const checkAuthentication = async () => {
+      const token =
+        (await getLocalStorageToken("user")) ||
+        (await getSectionStorageToken("user"));
+      setAuthenticated(token !== null);
+    };
+
+    checkAuthentication();
+  }, [router]);
+
+  if (authenticated && pathname === "/admin/login") {
+    return router.push("/admin/dashboard");
+  }
 
   return (
     <div className="bg-white w-full max-w-[500px] p-10 rounded-xl overflow-hidden">
