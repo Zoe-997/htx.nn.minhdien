@@ -1,5 +1,7 @@
 export const constants = {
-  API_URL: "https://mdc-website.onrender.com",
-  API_URL_DEV: "http://localhost:3000",
-  TOKEN_FLASH_SHIP_EXPIRATION: 48 * 60 * 60 * 1000,
+  API_URL:
+    process.env.NEXT_PUBLIC_MODE === "production"
+      ? process.env.NEXT_PUBLIC_API_URL_PRODUCTION
+      : process.env.NEXT_PUBLIC_API_URL_DEV,
+  TOKEN_EXPIRATION: 48 * 60 * 60 * 1000,
 };

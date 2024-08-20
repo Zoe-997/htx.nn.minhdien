@@ -42,7 +42,7 @@ const Register: React.FC = () => {
   };
 
   return (
-    <div className="bg-white w-full max-w-[500px] p-10 rounded-xl overflow-hidden">
+    <div>
       <div className="flex flex-col items-center text-center mb-5">
         <Logo isHeader />
         <h1 className="text-2xl font-bold mt-2">Admin Register</h1>

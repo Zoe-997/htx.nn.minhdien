@@ -28,6 +28,10 @@ body {
   font-size: medium;
 }
 
+body * {
+  font-family: inherit !important;
+}
+
 .hide-scrollbar {
   scrollbar-width: none;
 }
@@ -139,7 +143,8 @@ body .ant-btn-link:not(:disabled):not(.ant-btn-disabled):hover {
   color: var(--color-link);
 }
 
-body a:hover {
+body a:hover,
+:where(.css-dev-only-do-not-override-d2lrxs).ant-breadcrumb a:hover {
   color: var(--color-link);
 }
 
