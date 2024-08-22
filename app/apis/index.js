@@ -16,10 +16,15 @@ export const callApi = (endPoint, method, body) => {
   if (checkEndPoint(endPoint) === false) {
     axios.interceptors.request.use(
       (config) => {
-        const token =
+        const user =
           getLocalStorageToken("user") || getSectionStorageToken("user");
-        if (token) {
-          config.headers.Authorization = `Bearer ${token}`;
+
+        if (user) {
+          const token = JSON.parse(user).access_token;
+
+          if (token) {
+            config.headers.Authorization = `Bearer ${token}`;
+          }
         }
         return config;
       },

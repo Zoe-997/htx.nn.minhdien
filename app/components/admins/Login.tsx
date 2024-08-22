@@ -27,8 +27,6 @@ const Login: React.FC = () => {
   const { login, loading } = useAuthStore();
 
   const onFinish: FormProps<FieldType>["onFinish"] = (values) => {
-    console.log("Success:", values);
-
     const onSuccess = (res: any) => {
       if (res) {
         message.success("Login success");
@@ -43,7 +41,8 @@ const Login: React.FC = () => {
     };
 
     const onFail = (err: any) => {
-      message.success(`${err.statusCode} - ${err.message}`);
+      if (err) message.error(`${err.statusCode} - ${err.message}`);
+      else message.error(`Login fail`);
     };
 
     login(values, onSuccess, onFail);

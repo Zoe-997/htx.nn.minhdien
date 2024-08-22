@@ -8,6 +8,7 @@ const RedirectPages = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
   const pathname = usePathname();
   const [authenticated, setAuthenticated] = useState<boolean | null>(null);
+  const [hasRedirected, setHasRedirected] = useState(false);
 
   useEffect(() => {
     const checkAuthentication = async () => {
@@ -18,7 +19,28 @@ const RedirectPages = ({ children }: { children: React.ReactNode }) => {
     };
 
     checkAuthentication();
-  }, [router]);
+  }, []);
+
+  useEffect(() => {
+    // Điều hướng đến trang login nếu không xác thực
+    if (
+      authenticated === false &&
+      pathname !== "/admin/login" &&
+      !hasRedirected
+    ) {
+      router.push("/admin/login");
+      setHasRedirected(true);
+    }
+    // Điều hướng đến trang dashboard nếu đã xác thực và đang ở trang admin hoặc login
+    else if (
+      authenticated &&
+      (pathname === "/admin" || pathname === "/admin/login") &&
+      !hasRedirected
+    ) {
+      router.push("/admin/dashboard");
+      setHasRedirected(true);
+    }
+  }, [authenticated, pathname, router, hasRedirected]);
 
   if (authenticated === null) {
     return (
@@ -37,14 +59,6 @@ const RedirectPages = ({ children }: { children: React.ReactNode }) => {
         Loading...
       </div>
     );
-  }
-
-  if (!authenticated) {
-    router.push("/admin/login");
-  }
-
-  if (pathname === "/admin") {
-    router.push("/admin/dashboard");
   }
 
   return <div>{children}</div>;

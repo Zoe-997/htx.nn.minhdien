@@ -1,9 +1,11 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { Table, Tag, Dropdown } from "antd";
+import { Table, Tag, Dropdown, Modal, message } from "antd";
 import type { TableProps, MenuProps } from "antd";
+import { InfoCircleOutlined } from "@ant-design/icons";
 import { EllipsisVertical } from "lucide-react";
+import { useAuthStore } from "@/app/apis/stores/authStore";
 
 interface DataType {
   key: string;
@@ -15,40 +17,55 @@ interface DataType {
   isActive: boolean;
 }
 
-const data: DataType[] = [
-  {
-    key: "1",
-    id: "rthfphjghlkmhlkm",
-    firstName: "dsfrgbhkjgegbig",
-    lastName: "New York No. 1 Lake Park",
-    email: "test123@gmmail.com",
-    permission: "Admin",
-    isActive: true,
-  },
-  {
-    key: "2",
-    id: "rthfphjghlkmhlkdfh",
-    firstName: "dsfrgbhkjgegbig",
-    lastName: "New York No. 1 Lake Park",
-    email: "test123@gmmail.com",
-    permission: "Admin",
-    isActive: false,
-  },
-];
-
 const UsersTable: React.FC = () => {
   const [recordAction, setRecordAction] = useState<any>({});
-  console.log("recordAction: ", recordAction);
+  const [users, setUsers] = useState<DataType[]>([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { getAllUsers, userDelete, loading } = useAuthStore();
+
+  const fetchAllUsers = () => {
+    const onSuccess = (res: any) => {
+      if (res) {
+        const data = res.map((item: any, index: number) => ({
+          key: index,
+          ...item,
+        }));
+        setUsers(data);
+      }
+    };
+
+    getAllUsers(onSuccess);
+  };
+
+  const handleDeleteUser = () => {
+    const onSuccess = (res: any) => {
+      if (res) {
+        fetchAllUsers();
+        message.success("Delete user success!");
+      }
+    };
+
+    const onFail = (err: any) => {
+      message.error(err.message);
+    };
+
+    userDelete(recordAction.id, onSuccess, onFail);
+    setIsModalOpen(false);
+  };
+
+  useEffect(() => {
+    fetchAllUsers();
+  }, []);
 
   const items: MenuProps["items"] = [
     {
       key: "1",
-      label: <span onClick={() => {}}>Edit</span>,
+      label: <Link href={`/admin/users/${recordAction.id}`}>Update</Link>,
     },
     {
       key: "2",
       label: (
-        <span onClick={() => {}} className="text-red-600">
+        <span onClick={() => setIsModalOpen(true)} className="text-red-600">
           Delete
         </span>
       ),
@@ -60,7 +77,6 @@ const UsersTable: React.FC = () => {
       title: "Id",
       dataIndex: "id",
       key: "id",
-      render: (text) => <Link href={`/admin/users/${text}`}>{text}</Link>,
     },
     {
       title: "Email",
@@ -112,7 +128,23 @@ const UsersTable: React.FC = () => {
     },
   ];
 
-  return <Table columns={columns} dataSource={data} />;
+  return (
+    <>
+      <Table columns={columns} dataSource={users} loading={loading} />
+      <Modal
+        open={isModalOpen}
+        onOk={handleDeleteUser}
+        onCancel={() => setIsModalOpen(false)}
+        width={400}
+        className="text-center p-0"
+      >
+        <h3 className="font-semibold flex gap-2">
+          <InfoCircleOutlined className="text-yellow-500 text-[20px]" />
+          Are you sure you want to delete this account?
+        </h3>
+      </Modal>
+    </>
+  );
 };
 
 export default UsersTable;
