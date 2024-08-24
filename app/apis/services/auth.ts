@@ -20,8 +20,8 @@ const updateUser = (id: string, form: any) => {
   return callApi(`/users/${id}`, "patch", form);
 };
 
-const userDelete = (id: string) => {
-  return callApi(`/users/${id}/delete`, "delete");
+const userRemove = (id: string) => {
+  return callApi(`/users/${id}`, "delete");
 };
 
 export const auth = {
@@ -30,5 +30,5 @@ export const auth = {
   getAllUsers,
   getUserById,
   updateUser,
-  userDelete,
+  userRemove,
 };

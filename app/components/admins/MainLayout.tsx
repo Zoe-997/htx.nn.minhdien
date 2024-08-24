@@ -48,8 +48,6 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
 
-  console.log("breadcrumb: ", breadcrumb);
-
   return (
     <Layout style={{ minHeight: "100vh" }}>
       <Sider

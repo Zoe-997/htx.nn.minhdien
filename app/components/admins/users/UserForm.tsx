@@ -1,16 +1,9 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import { CldUploadWidget } from "next-cloudinary";
+import { CldImage } from "next-cloudinary";
 import { PlusOutlined } from "@ant-design/icons";
-import {
-  Button,
-  Checkbox,
-  DatePicker,
-  Form,
-  Input,
-  message,
-  Select,
-  Upload,
-} from "antd";
+import { Button, Checkbox, Form, Input, message, Select, Upload } from "antd";
 import type { FormProps } from "antd";
 
 import { constants } from "@/app/libs/constants";
@@ -21,15 +14,10 @@ import {
   getSectionStorageToken,
 } from "@/app/libs/auth";
 
-const normFile = (e: any) => {
-  if (Array.isArray(e)) {
-    return e;
-  }
-  return e?.fileList;
-};
+import ImageUpload from "../ImageUpload";
 
 interface UserFormProps {
-  userId: string;
+  userId?: string;
 }
 
 type FieldType = {
@@ -39,7 +27,7 @@ type FieldType = {
   resetPassword: string;
   email: string;
   permission: string;
-  avatar: string;
+  image: string;
   isActive: boolean;
 };
 
@@ -58,29 +46,33 @@ const UserForm = ({ userId }: UserFormProps) => {
         form.setFieldsValue(res);
       }
     };
-    getUserById(userId, onSuccess);
+    if (userId) getUserById(userId, onSuccess);
   }, [userId, getUserById, form]);
 
   const onFinish: FormProps<FieldType>["onFinish"] = (values) => {
     let dataSubmit: any = { ...values };
-    if (!constants.FULL_PERMISSION.includes(UserPermission)) {
-      const { permission, isActive, ...dataSubmitOmit } = values;
-      dataSubmit = { ...dataSubmitOmit };
-    }
+    if (userId) {
+      if (!constants.FULL_PERMISSION.includes(UserPermission)) {
+        const { permission, isActive, ...dataSubmitOmit } = values;
+        dataSubmit = { ...dataSubmitOmit };
+      }
 
-    const dataUpdate = getChangedFields(userUpdate, dataSubmit);
-    if (dataUpdate) {
-      const onSuccess = (res: any) => {
-        if (res) message.success("Update success");
-      };
+      const dataUpdate = getChangedFields(userUpdate, dataSubmit);
+      if (dataUpdate) {
+        const onSuccess = (res: any) => {
+          if (res) message.success("Update success");
+        };
 
-      const onFail = (err: any) => {
-        if (err) message.error(`${err.statusCode} - ${err.message}`);
-        else message.error("Update fail");
-      };
-      updateUser(userId, dataUpdate, onSuccess, onFail);
+        const onFail = (err: any) => {
+          if (err) message.error(`${err.statusCode} - ${err.message}`);
+          else message.error("Update fail");
+        };
+        updateUser(userId, dataUpdate, onSuccess, onFail);
+      } else {
+        message.info("Nothing to update");
+      }
     } else {
-      message.info("Nothing to update");
+      console.log("dataSubmit: ", dataSubmit);
     }
   };
 
@@ -92,13 +84,15 @@ const UserForm = ({ userId }: UserFormProps) => {
 
   return (
     <>
-      <Checkbox
-        checked={componentDisabled}
-        onChange={(e) => setComponentDisabled(e.target.checked)}
-        className="mb-5"
-      >
-        Update user
-      </Checkbox>
+      {userId && (
+        <Checkbox
+          checked={componentDisabled}
+          onChange={(e) => setComponentDisabled(e.target.checked)}
+          className="mb-5"
+        >
+          Update user
+        </Checkbox>
+      )}
 
       <Form
         layout="vertical"
@@ -108,17 +102,54 @@ const UserForm = ({ userId }: UserFormProps) => {
         onFinishFailed={onFinishFailed}
       >
         <div className="flex flex-wrap gap-3">
-          <Form.Item label="First name" name="firstName" className="flex-1">
+          <Form.Item
+            label="First name"
+            name="firstName"
+            className="flex-1"
+            rules={
+              !userId
+                ? [
+                    {
+                      required: true,
+                      message: "Please input your first name!",
+                    },
+                  ]
+                : []
+            }
+          >
             <Input />
           </Form.Item>
 
-          <Form.Item label="Last name" name="lastName" className="flex-1">
+          <Form.Item
+            label="Last name"
+            name="lastName"
+            className="flex-1"
+            rules={
+              !userId
+                ? [
+                    {
+                      required: true,
+                      message: "Please input your last name!",
+                    },
+                  ]
+                : []
+            }
+          >
             <Input />
           </Form.Item>
         </div>
 
         <div className="flex flex-wrap gap-3">
-          <Form.Item label="Email" name="email" className="flex-1">
+          <Form.Item
+            label="Email"
+            name="email"
+            className="flex-1"
+            rules={
+              !userId
+                ? [{ required: true, message: "Please input your email!" }]
+                : []
+            }
+          >
             <Input />
           </Form.Item>
 
@@ -136,7 +167,16 @@ const UserForm = ({ userId }: UserFormProps) => {
         </div>
 
         <div className="flex flex-wrap gap-3">
-          <Form.Item label="Password" name="password" className="flex-1">
+          <Form.Item
+            label="Password"
+            name="password"
+            className="flex-1"
+            rules={
+              !userId
+                ? [{ required: true, message: "Please input your password!" }]
+                : []
+            }
+          >
             <Input.Password autoComplete="new-password" />
           </Form.Item>
 
@@ -144,29 +184,36 @@ const UserForm = ({ userId }: UserFormProps) => {
             label="Reset password"
             name="resetPassword"
             className="flex-1"
+            rules={
+              !userId
+                ? [
+                    {
+                      required: true,
+                      message: "Please input your reset password!",
+                    },
+                  ]
+                : []
+            }
           >
             <Input.Password autoComplete="new-password" />
           </Form.Item>
         </div>
 
-        <Form.Item
-          label="Avatar"
-          valuePropName="fileList"
-          getValueFromEvent={normFile}
-        >
-          <Upload action="/upload.do" listType="picture-card">
-            <button style={{ border: 0, background: "none" }} type="button">
-              <PlusOutlined />
-              <div style={{ marginTop: 8 }}>Upload</div>
-            </button>
-          </Upload>
+        <Form.Item label="Avatar" name="image">
+          <div className="ssx:w-[300px] ssx:h-[300px]">
+            <ImageUpload
+              value={form.getFieldValue("image")}
+              onChange={(value) => {
+                form.setFieldValue("image", value);
+              }}
+            />
+          </div>
         </Form.Item>
 
         <Form.Item name="isActive">
           <Checkbox
             checked={true}
             disabled={!constants.FULL_PERMISSION.includes(UserPermission)}
-            onChange={() => {}}
           >
             Active
           </Checkbox>
@@ -174,7 +221,7 @@ const UserForm = ({ userId }: UserFormProps) => {
 
         <Form.Item>
           <Button type="primary" htmlType="submit">
-            Update
+            {userId ? "Update" : "Create"}
           </Button>
         </Form.Item>
       </Form>

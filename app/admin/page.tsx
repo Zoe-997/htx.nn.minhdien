@@ -1,3 +1,3 @@
 export default function AdminHome() {
-  return <div>Admin home</div>;
+  return <div>Please await in few minus. We are directing to admin page</div>;
 }

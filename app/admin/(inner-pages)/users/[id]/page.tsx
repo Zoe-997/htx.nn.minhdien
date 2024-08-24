@@ -33,11 +33,9 @@ export default async function BlogsPageDetail({
 }: {
   params: { id: string };
 }) {
-  console.log("params", params);
-
   return (
-    <div>
+    <>
       <UserForm userId={params.id} />
-    </div>
+    </>
   );
 }

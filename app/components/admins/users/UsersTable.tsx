@@ -21,7 +21,7 @@ const UsersTable: React.FC = () => {
   const [recordAction, setRecordAction] = useState<any>({});
   const [users, setUsers] = useState<DataType[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { getAllUsers, userDelete, loading } = useAuthStore();
+  const { getAllUsers, userRemove, loading } = useAuthStore();
 
   const fetchAllUsers = () => {
     const onSuccess = (res: any) => {
@@ -49,7 +49,7 @@ const UsersTable: React.FC = () => {
       message.error(err.message);
     };
 
-    userDelete(recordAction.id, onSuccess, onFail);
+    userRemove(recordAction.id, onSuccess, onFail);
     setIsModalOpen(false);
   };
 

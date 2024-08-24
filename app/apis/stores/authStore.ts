@@ -32,7 +32,7 @@ interface AuthStore {
     onFail?: (data: any) => void
   ) => void;
 
-  userDelete: (
+  userRemove: (
     id: string,
     onSuccess?: (data: any) => void,
     onFail?: (data: any) => void
@@ -96,10 +96,10 @@ export const useAuthStore = create<AuthStore>((set) => ({
     set({ loading: false });
   },
 
-  userDelete: async (id, onSuccess, onFail) => {
+  userRemove: async (id, onSuccess, onFail) => {
     try {
       set({ loading: true });
-      const response = await RepositoryRemote.auth.userDelete(id);
+      const response = await RepositoryRemote.auth.userRemove(id);
       onSuccess?.(response?.data);
     } catch (error: any) {
       onFail?.(error?.response?.data);
