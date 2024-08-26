@@ -12,6 +12,7 @@ import { Breadcrumb, Layout, Menu, theme, Avatar, Space } from "antd";
 import Logo from "../headers/Logo";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import { getLocalStorageToken, getSectionStorageToken } from "@/app/libs/auth";
 
 const { Content, Footer, Sider } = Layout;
 
@@ -47,6 +48,9 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
+
+  const user = getLocalStorageToken("user") || getSectionStorageToken("user");
+  const useJson = user ? JSON.parse(user) : {};
 
   return (
     <Layout style={{ minHeight: "100vh" }}>
@@ -92,7 +96,9 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
           />
           <Space wrap size={5}>
             <Avatar icon={<UserOutlined />} />
-            <span>Admin</span>
+            <span>
+              {useJson?.user?.firstName} {useJson?.user?.lastName}
+            </span>
           </Space>
         </div>
 
