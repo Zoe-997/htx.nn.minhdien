@@ -3,7 +3,6 @@ export const constants = {
     process.env.NEXT_PUBLIC_MODE === "production"
       ? process.env.NEXT_PUBLIC_API_URL_PRODUCTION
       : process.env.NEXT_PUBLIC_API_URL_DEV,
-  TOKEN_EXPIRATION: 48 * 60 * 60 * 1000,
   FULL_PERMISSION: ["Admin", "SupperAdmin"],
   PERMISSIONS: ["SupperAdmin", "Admin", "Manager", "Content"],
 };

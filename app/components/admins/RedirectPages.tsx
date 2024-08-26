@@ -2,7 +2,12 @@
 import React, { useEffect, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
 
-import { getLocalStorageToken, getSectionStorageToken } from "@/app/libs/auth";
+import {
+  getLocalStorageToken,
+  getSectionStorageToken,
+  removeLocalStorageToken,
+  removeSectionStorageToken,
+} from "@/app/libs/auth";
 
 const RedirectPages = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
@@ -12,17 +17,30 @@ const RedirectPages = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     const checkAuthentication = async () => {
-      const token =
+      const user =
         (await getLocalStorageToken("user")) ||
         (await getSectionStorageToken("user"));
-      setAuthenticated(token !== null);
+
+      if (user) {
+        const expirationToken = JSON.parse(user).expiration_token;
+        const currentTime = Math.floor(Date.now() / 1000);
+
+        if (currentTime < expirationToken) {
+          setAuthenticated(true);
+        } else {
+          removeLocalStorageToken("user");
+          removeSectionStorageToken("user");
+          setAuthenticated(false);
+        }
+      } else {
+        setAuthenticated(false);
+      }
     };
 
     checkAuthentication();
   }, []);
 
   useEffect(() => {
-    // Điều hướng đến trang login nếu không xác thực
     if (
       authenticated === false &&
       pathname !== "/admin/login" &&
@@ -30,9 +48,7 @@ const RedirectPages = ({ children }: { children: React.ReactNode }) => {
     ) {
       router.push("/admin/login");
       setHasRedirected(true);
-    }
-    // Điều hướng đến trang dashboard nếu đã xác thực và đang ở trang admin hoặc login
-    else if (
+    } else if (
       authenticated &&
       (pathname === "/admin" || pathname === "/admin/login") &&
       !hasRedirected

@@ -14,6 +14,14 @@ export const setSectionStorageToken = (key: string, value: string) => {
   return sessionStorage.setItem(key, value);
 };
 
+export const removeLocalStorageToken = (key: string) => {
+  return localStorage.removeItem(key);
+};
+
+export const removeSectionStorageToken = (key: string) => {
+  return sessionStorage.removeItem(key);
+};
+
 export const getChangedFields = (
   obj1: Record<string, any>,
   obj2: Record<string, any>
