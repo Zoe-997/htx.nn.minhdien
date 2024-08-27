@@ -1,11 +1,13 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { Table, Tag, Dropdown, Modal, message } from "antd";
+import { Table, Dropdown, Modal, message } from "antd";
 import type { TableProps, MenuProps } from "antd";
 import { InfoCircleOutlined } from "@ant-design/icons";
 import { EllipsisVertical } from "lucide-react";
-import { useAuthStore } from "@/app/apis/stores/authStore";
+
+import { useProductsStore } from "@/app/apis/stores/productsStore";
+import TableGeneral from "../TableGeneral";
 
 interface DataType {
   key: string;
@@ -19,29 +21,31 @@ interface DataType {
 
 const ProductsTable: React.FC = () => {
   const [recordAction, setRecordAction] = useState<any>({});
-  const [users, setUsers] = useState<DataType[]>([]);
+  const [products, setProducts] = useState<DataType[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { getAllUsers, userRemove, loading } = useAuthStore();
+  const { getAllProducts, productRemove, loading } = useProductsStore();
 
-  const fetchAllUsers = () => {
+  const fetchAllProducts = () => {
     const onSuccess = (res: any) => {
       if (res) {
-        const data = res.map((item: any, index: number) => ({
+        const data = res.products.map((item: any, index: number) => ({
           key: index,
           ...item,
         }));
-        setUsers(data);
+        setProducts(data);
       }
     };
 
-    getAllUsers(onSuccess);
+    getAllProducts(onSuccess);
   };
 
-  const handleDeleteUser = () => {
+  const handleDeleteProduct = () => {
     const onSuccess = (res: any) => {
       if (res) {
-        fetchAllUsers();
-        message.success("Delete user success!");
+        console.log("res: ", res);
+
+        fetchAllProducts();
+        message.success("Delete product success!");
       }
     };
 
@@ -49,18 +53,18 @@ const ProductsTable: React.FC = () => {
       message.error(err.message);
     };
 
-    userRemove(recordAction.id, onSuccess, onFail);
+    productRemove(recordAction.id, onSuccess, onFail);
     setIsModalOpen(false);
   };
 
   useEffect(() => {
-    fetchAllUsers();
+    fetchAllProducts();
   }, []);
 
   const items: MenuProps["items"] = [
     {
       key: "1",
-      label: <Link href={`/admin/users/${recordAction.id}`}>Update</Link>,
+      label: <Link href={`/admin/products/${recordAction.id}`}>Update</Link>,
     },
     {
       key: "2",
@@ -101,7 +105,7 @@ const ProductsTable: React.FC = () => {
           onOpenChange={() => setRecordAction(record)}
         >
           <span className="cursor-pointer">
-            <EllipsisVertical size={17} />
+            <EllipsisVertical size={17} className="mx-auto" />
           </span>
         </Dropdown>
       ),
@@ -109,21 +113,15 @@ const ProductsTable: React.FC = () => {
   ];
 
   return (
-    <>
-      <Table columns={columns} dataSource={users} loading={loading} />
-      <Modal
-        open={isModalOpen}
-        onOk={handleDeleteUser}
-        onCancel={() => setIsModalOpen(false)}
-        width={400}
-        className="text-center p-0"
-      >
-        <h3 className="font-semibold flex gap-2">
-          <InfoCircleOutlined className="text-yellow-500 text-[20px]" />
-          Are you sure you want to delete this account?
-        </h3>
-      </Modal>
-    </>
+    <TableGeneral
+      columns={columns}
+      data={products}
+      loading={loading}
+      openModal={isModalOpen}
+      onCancel={() => setIsModalOpen(false)}
+      onOK={handleDeleteProduct}
+      titleModal="Are you sure you want to delete this product?"
+    />
   );
 };
 

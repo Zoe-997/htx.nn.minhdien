@@ -6,9 +6,11 @@ import {
   PieChartOutlined,
   UserOutlined,
   FormOutlined,
+  HistoryOutlined,
+  SignatureOutlined,
 } from "@ant-design/icons";
 import type { MenuProps } from "antd";
-import { Breadcrumb, Layout, Menu, theme, Avatar, Space } from "antd";
+import { Breadcrumb, Layout, Menu, theme, Avatar, Space, Affix } from "antd";
 import Logo from "../headers/Logo";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
@@ -39,6 +41,8 @@ const items: MenuItem[] = [
   getItem("Users", "/admin/users", "users", <UserOutlined />),
   getItem("Blogs", "/admin/blogs", "blogs", <FormOutlined />),
   getItem("Files", "/admin/files", "files", <FileOutlined />),
+  getItem("Seo", "/admin/seo", "seo", <HistoryOutlined />),
+  getItem("Contact", "/admin/contact", "contact", <SignatureOutlined />),
 ];
 
 const MainLayout = ({ children }: { children: React.ReactNode }) => {
@@ -74,33 +78,35 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
         />
       </Sider>
       <Layout className="relative pt-20">
-        <div className="flex flex-wrap gap-5 items-center justify-between px-10 py-3 bg-white shadow-sm absolute top-0 right-0 left-0">
-          <Breadcrumb
-            className="capitalize"
-            items={breadcrumb.map((item: string, index: number) => {
-              const href = breadcrumb.slice(0, index + 1).join("/");
-              return {
-                title:
-                  index === breadcrumb.length - 1 ? (
-                    <span className="text-base">{item}</span>
-                  ) : (
-                    <Link
-                      href={`/${href}`}
-                      className="text-base hover:!bg-transparent"
-                    >
-                      {item}
-                    </Link>
-                  ),
-              };
-            })}
-          />
-          <Space wrap size={5}>
-            <Avatar icon={<UserOutlined />} />
-            <span>
-              {useJson?.user?.firstName} {useJson?.user?.lastName}
-            </span>
-          </Space>
-        </div>
+        <Affix>
+          <div className="flex flex-wrap gap-5 items-center justify-between px-10 py-3 bg-white shadow-sm absolute top-0 right-0 left-0">
+            <Breadcrumb
+              className="capitalize"
+              items={breadcrumb.map((item: string, index: number) => {
+                const href = breadcrumb.slice(0, index + 1).join("/");
+                return {
+                  title:
+                    index === breadcrumb.length - 1 ? (
+                      <span className="text-base">{item}</span>
+                    ) : (
+                      <Link
+                        href={`/${href}`}
+                        className="text-base hover:!bg-transparent"
+                      >
+                        {item}
+                      </Link>
+                    ),
+                };
+              })}
+            />
+            <Space wrap size={5}>
+              <Avatar icon={<UserOutlined />} />
+              <span>
+                {useJson?.user?.firstName} {useJson?.user?.lastName}
+              </span>
+            </Space>
+          </div>
+        </Affix>
 
         <Content className="px-10">
           <div

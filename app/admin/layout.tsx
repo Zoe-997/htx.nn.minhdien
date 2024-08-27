@@ -1,6 +1,7 @@
 import { Nunito } from "next/font/google";
 
 import "@/app/globals.css";
+import "react-quill/dist/quill.snow.css";
 import RedirectPages from "../components/admins/RedirectPages";
 
 const fontBase = Nunito({ subsets: ["latin", "vietnamese"] });
