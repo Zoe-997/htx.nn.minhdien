@@ -53,9 +53,21 @@ const config: Config = {
         "0%": { transform: "scale(1) translateY(0)" },
         "100%": { transform: "scale(1.25) translateY(15px)" },
       },
+      ctaArrowSVGStart: {
+        "0%": {
+          transform:
+            "translateY(calc(-50% + 0.5px)) translateX(0) translateZ(0)",
+        },
+        "100%": {
+          transform:
+            "translateY(calc(-50% + 0.5px)) translateX(-3px) translateZ(0)",
+        },
+      },
     },
     animation: {
       kenburnsBottom: "kenburnsBottom 5s ease-out both",
+      ctaArrowSVGStart:
+        "ctaArrowSVGStart 0.45s cubic-bezier(0.23, 0.46, 0.4, 1) forwards",
     },
   },
   plugins: [],

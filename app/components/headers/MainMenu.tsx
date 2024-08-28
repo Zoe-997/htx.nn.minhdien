@@ -21,7 +21,9 @@ const MainMenu = () => {
         {items.map((item: MenuItem, index: number) => (
           <li
             key={index}
-            className={pathname === item.path ? "text-[var(--color-link)]" : ""}
+            className={
+              pathname === item.path ? "text-[rgb(var(--color-link))]" : ""
+            }
           >
             <Link href={item.path}>{item.title}</Link>
           </li>

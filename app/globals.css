@@ -3,25 +3,25 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 50, 68, 75;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-  --border-cl: #f0f0f0;
-  --color-link: #eaaa18;
+  --foreground-rgb: 50 68 75;
+  --background-start-rgb: 214 219 220;
+  --background-end-rgb: 255 255 255;
+  --border-cl: 240 240 240;
+  --color-link: 234 170 24;
   --box-shadow: 0 12.5px 12.5px 12.5px rgba(0, 0, 0, 0.15);
 
-  --sidebar-bg: #1e6f48;
-  --sidebar-text: #ffffff;
+  --sidebar-bg: 30 111 72;
+  --sidebar-text: 255 255 255;
 
-  --error-cl: #8e0b21;
+  --error-cl: 142 11 33;
 
-  --btn-bg: #2a6948;
-  --btn-text: #ffffff;
-  --btn-bd: #2a6948;
+  --btn-bg: 42 105 72;
+  --btn-text: 255 255 255;
+  --btn-bd: 42 105 72;
 
-  --btn-bg-hv: #245d4d;
-  --btn-text-hv: #ffffff;
-  --btn-bd-hv: #245d4d;
+  --btn-bg-hv: 36 93 77;
+  --btn-text-hv: 255 255 255;
+  --btn-bd-hv: 36 93 77;
 }
 
 body {
@@ -30,6 +30,7 @@ body {
 
 body * {
   font-family: inherit !important;
+  user-select: none;
 }
 
 .hide-scrollbar {
@@ -45,7 +46,7 @@ body * {
 
 @media screen and (min-width: 1680px) {
   .container {
-    max-width: 100%;
+    max-width: 1680px;
     padding-left: 50px;
     padding-right: 50px;
   }
@@ -53,15 +54,15 @@ body * {
 
 /* antd */
 body .ant-btn-primary {
-  background-color: var(--btn-bg);
-  border-color: var(--btn-bd);
-  color: var(--btn-text);
+  background-color: rgb(var(--btn-bg));
+  border-color: rgb(var(--btn-bd));
+  color: rgb(var(--btn-text));
 }
 
 body .ant-btn-primary:not(:disabled):not(.ant-btn-disabled):hover {
-  background-color: var(--btn-bg-hv);
-  border-color: var(--btn-bd-hv);
-  color: var(--btn-text-hv);
+  background-color: rgb(var(--btn-bg-hv));
+  border-color: rgb(var(--btn-bd-hv));
+  color: rgb(var(--btn-text-hv));
 }
 
 body .ant-checkbox-checked .ant-checkbox-inner,
@@ -70,8 +71,8 @@ body
   .ant-checkbox-checked:not(.ant-checkbox-disabled)
   .ant-checkbox-inner,
 body .ant-radio-wrapper .ant-radio-checked .ant-radio-inner {
-  background-color: var(--btn-bg);
-  border-color: var(--btn-bd);
+  background-color: rgb(var(--btn-bg));
+  border-color: rgb(var(--btn-bd));
 }
 
 body
@@ -85,16 +86,16 @@ body .ant-input-affix-wrapper:focus,
 body .ant-input-affix-wrapper:focus-within,
 .ant-radio-wrapper:hover body .ant-radio-wrapper,
 body .ant-radio-wrapper:hover .ant-radio-inner {
-  border-color: var(--btn-bd);
+  border-color: rgb(var(--btn-bd));
 }
 
 body .ant-btn-default:not(:disabled):not(.ant-btn-disabled):hover {
-  border-color: var(--color-link);
-  color: var(--color-link);
+  border-color: rgb(var(--color-link));
+  color: rgb(var(--color-link));
 }
 
 body .ant-checkbox-indeterminate .ant-checkbox-inner:after {
-  background-color: var(--btn-bg);
+  background-color: rgb(var(--btn-bg));
 }
 
 body
@@ -117,35 +118,35 @@ body
   > .ant-menu
   .ant-menu-item:not(.ant-menu-item-selected):not(.ant-menu-submenu-selected)
   > .ant-menu-submenu-title:hover {
-  color: var(--sidebar-text);
+  color: rgb(var(--sidebar-text));
 }
 
 body .ant-menu-light .ant-menu-item-selected,
 body .ant-menu-light > .ant-menu .ant-menu-item-selected {
-  color: var(--color-link);
+  color: rgb(var(--color-link));
 }
 
 body .ant-pagination .ant-pagination-item-active a {
-  color: var(--btn-bd);
+  color: rgb(var(--btn-bd));
 }
 
 body .ant-pagination .ant-pagination-item-active {
-  border-color: var(--btn-bd);
+  border-color: rgb(var(--btn-bd));
 }
 
 body .ant-btn-dashed:not(:disabled):not(.ant-btn-disabled):hover {
-  color: var(--btn-bd);
-  border-color: var(--btn-bd);
+  color: rgb(var(--btn-bd));
+  border-color: rgb(var(--btn-bd));
 }
 
 body .ant-btn-link,
 body .ant-btn-link:not(:disabled):not(.ant-btn-disabled):hover {
-  color: var(--color-link);
+  color: rgb(var(--color-link));
 }
 
 body a:hover,
 :where(.css-dev-only-do-not-override-d2lrxs).ant-breadcrumb a:hover {
-  color: var(--color-link);
+  color: rgb(var(--color-link));
 }
 
 body .ant-menu-light.ant-menu-horizontal > .ant-menu-item-selected,
@@ -155,7 +156,7 @@ body
   .ant-menu-light
   > .ant-menu.ant-menu-horizontal
   > .ant-menu-submenu-selected {
-  color: var(--color-link);
+  color: rgb(var(--color-link));
 }
 
 body .ant-menu-light.ant-menu-horizontal > .ant-menu-item-selected::after,
@@ -168,7 +169,7 @@ body
   .ant-menu-light
   > .ant-menu.ant-menu-horizontal
   > .ant-menu-submenu-selected::after {
-  border-bottom-color: var(--color-link);
+  border-bottom-color: rgb(var(--color-link));
 }
 
 body .ant-breadcrumb ol {

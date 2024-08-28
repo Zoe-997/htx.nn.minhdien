@@ -1,5 +1,6 @@
 import BannerTop from "@/app/components/sections/BannerTop";
 import Introduction from "@/app/components/sections/Introduction";
+import OurWorks from "@/app/components/sections/OurWorks";
 
 export async function generateMetadata() {
   return {
@@ -19,6 +20,9 @@ export default function Home() {
     <>
       <BannerTop />
       <Introduction />
+      <div className="py-10">
+        <OurWorks />
+      </div>
     </>
   );
 }
