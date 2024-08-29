@@ -1,30 +1,41 @@
+"use client";
 import Link from "next/link";
 import { Mail, MapPin, Phone } from "lucide-react";
 
+import { useContactsStore } from "@/app/apis/stores/contactsStore";
+import { useEffect, useState } from "react";
+
 const FooterContact = () => {
+  const { getAllContact } = useContactsStore();
+  const [mainContact, setMainContact] = useState<any>({});
+
+  useEffect(() => {
+    const onSuccess = (res: any) => {
+      if (res) setMainContact(res.data[0]);
+    };
+    getAllContact("main", onSuccess);
+  }, [getAllContact]);
+
   return (
     <div>
       <ul>
         <li className="flex flex-wrap gap-2 mb-2">
           <MapPin size={15} />
           <div className="flex-1">
-            <strong>HTX - Minh Dien</strong>
-            <p>
-              Truc Chinh commune, Truc Ninh district, Nam Dinh province,
-              VietNam.
-            </p>
+            <strong>{process.env.NEXT_PUBLIC_STORE_NAME}</strong>
+            <p>{mainContact?.address}</p>
           </div>
         </li>
-        <li className="flex flex-wrap gap-2 mb-2">
+        <li className="flex flex-wrap items-center gap-2 mb-2">
           <Phone size={15} />
-          <Link href="tel: (+84) 833 251 098" className="flex-1">
-            (+84) 833 251 098
+          <Link href={`tel: ${mainContact?.phone}`} className="flex-1">
+            {mainContact?.phone}
           </Link>
         </li>
-        <li className="flex flex-wrap gap-2 mb-2">
+        <li className="flex flex-wrap items-center gap-2 mb-2">
           <Mail size={15} />
-          <Link href="mailto: htx.minhdien.nd@gmail.com" className="flex-1">
-            htx.minhdien.nd@gmail.com
+          <Link href={`mailto: ${mainContact.email}`} className="flex-1">
+            {mainContact.email}
           </Link>
         </li>
       </ul>

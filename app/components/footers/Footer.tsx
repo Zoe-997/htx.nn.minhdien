@@ -23,7 +23,7 @@ const Footer = () => {
   ];
 
   return (
-    <div className="bg-[rgb(var(--sidebar-bg))] text-[rgb(var(--sidebar-text))] pt-20">
+    <div className="bg-[rgb(var(--sidebar-bg))] text-[rgb(var(--sidebar-text))] pt-20 pb-5">
       <Container>
         <div className="flex flex-wrap -mx-5">
           <div className="px-5 lg:w-2/12">
