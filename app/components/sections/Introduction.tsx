@@ -3,6 +3,7 @@ import { ChevronRight } from "lucide-react";
 
 import Container from "@/app/components/commons/Container";
 import CoopValue from "@/app/components/sections/CoopValue";
+import Tags from "../commons/Tags";
 
 const Introduction = () => {
   return (
@@ -10,9 +11,10 @@ const Introduction = () => {
       <Container>
         <div className="flex flex-wrap gap-10">
           <div className="w-full md:w-4/12">
-            <p className="bg-[green] text-white inline-block px-3 rounded-sm mb-2">
-              Who we are
-            </p>
+            <div className="mb-2">
+              <Tags title="Who we are" />
+            </div>
+
             <h2 className="text-4xl">
               Asian Agri is a palm oil company that places smallholder
               partnerships at the heart of its day-to-day operations.

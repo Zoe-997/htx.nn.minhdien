@@ -20,7 +20,7 @@ export default function Home() {
     <>
       <BannerTop />
       <Introduction />
-      <div className="py-10">
+      <div className="py-20 bg-[#EDF8F0]">
         <OurWorks />
       </div>
     </>
