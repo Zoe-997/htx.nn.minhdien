@@ -8,7 +8,7 @@ const Tools = () => {
     <div>
       <Button
         type="primary"
-        className="rounded-full uppercase text-[12px] px-7 py-5"
+        className="hidden md:block rounded-full uppercase text-[12px] px-7 py-5"
         onClick={() => router.push("/contact")}
       >
         Contact now

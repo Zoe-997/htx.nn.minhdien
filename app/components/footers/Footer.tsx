@@ -23,11 +23,11 @@ const Footer = () => {
   ];
 
   return (
-    <div className="bg-[rgb(var(--sidebar-bg))] text-[rgb(var(--sidebar-text))] pt-20 pb-5">
+    <div className="bg-[rgb(var(--sidebar-bg))] text-[rgb(var(--sidebar-text))] pt-10 md:pt-20 pb-5">
       <Container>
         <div className="flex flex-wrap -mx-5">
-          <div className="px-5 lg:w-2/12">
-            <div className="max-w-[170px] pb-[46.82%] relative">
+          <div className="px-5 w-full lg:w-2/12 mb-5 md:mb-0">
+            <div className="max-w-[170px] pb-[18%] relative">
               <Image
                 src={`${process.env.NEXT_PUBLIC_IMAGES_URL}/images/logo2.png`}
                 alt="Mdc Logo"
@@ -37,19 +37,19 @@ const Footer = () => {
             </div>
           </div>
 
-          <div className="px-5 lg:w-3/12">
+          <div className="px-5 w-full lg:w-3/12 mb-10 md:mb-0">
             <FooterContact />
           </div>
 
-          <div className="px-5 lg:w-2/12">
+          <div className="px-5 w-full sx:w-1/2 lg:w-2/12 mb-10 md:mb-0">
             <FooterLinks menu={categories} title="CATEGORIES" />
           </div>
 
-          <div className="px-5 lg:w-2/12">
+          <div className="px-5 w-full sx:w-1/2 lg:w-2/12 mb-10 md:mb-0">
             <FooterLinks menu={information} title="INFORMATION" />
           </div>
 
-          <div className="px-5 lg:w-3/12">
+          <div className="px-5 w-full lg:w-3/12">
             <Newsletter />
           </div>
         </div>

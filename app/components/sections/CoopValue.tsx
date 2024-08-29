@@ -10,8 +10,8 @@ const CoopValue = () => {
           Corporate shared value
         </span>
       </h3>
-      <div className="flex-1 pl-0 md:pl-[200px]">
-        <div className="relative overflow-hidden rounded-lg p-20 ml-auto text-[rgb(var(--btn-text))]">
+      <div className="md:flex-1 pl-0 md:pl-[200px]">
+        <div className="relative overflow-hidden rounded-lg p-10 md:p-20 ml-auto text-[rgb(var(--btn-text))]">
           <div className="bg-[rgb(var(--btn-bg)/80%)] absolute top-0 right-0 bottom-0 left-0 -z-[1]"></div>
           <Image
             src={`${process.env.NEXT_PUBLIC_IMAGES_URL}/images/value-bg.png`}

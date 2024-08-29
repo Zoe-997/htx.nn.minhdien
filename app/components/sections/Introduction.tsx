@@ -15,7 +15,7 @@ const Introduction = () => {
               <Tags title="Who we are" />
             </div>
 
-            <h2 className="text-4xl">
+            <h2 className="text-2xl md:text-4xl">
               Asian Agri is a palm oil company that places smallholder
               partnerships at the heart of its day-to-day operations.
             </h2>
