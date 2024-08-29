@@ -3,8 +3,8 @@ import Container from "@/app/components/commons/Container";
 
 const BannerTop = () => {
   return (
-    <div className="">
-      <div className="relative pb-[60%] md:pb-[48%] overflow-hidden">
+    <div className="relative">
+      <div className="relative pb-[100%] sx:pb-[60%] md:pb-[48%] overflow-hidden">
         <Image
           src={`${process.env.NEXT_PUBLIC_IMAGES_URL}/images/banner.jpg`}
           alt="Banner"
