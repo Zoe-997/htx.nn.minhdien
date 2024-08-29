@@ -1,6 +1,6 @@
 import React from "react";
 import type { FormProps } from "antd";
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, message } from "antd";
 import FooterTitle from "@/app/components/footers/FooterTitle";
 import Social from "@/app/components/commons/Socials";
 
@@ -10,6 +10,7 @@ type FieldType = {
 
 const onFinish: FormProps<FieldType>["onFinish"] = (values) => {
   console.log("Success:", values);
+  message.success("Subscribe success!");
 };
 
 const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (errorInfo) => {

@@ -27,11 +27,11 @@ const Footer = () => {
       <Container>
         <div className="flex flex-wrap -mx-5">
           <div className="px-5 w-full lg:w-2/12 mb-5 md:mb-0">
-            <div className="max-w-[170px] pb-[18%] relative">
+            <div className="max-w-[170px] pb-[20%] md:pb-[54.35%] relative">
               <Image
                 src={`${process.env.NEXT_PUBLIC_IMAGES_URL}/images/logo2.png`}
                 alt="Mdc Logo"
-                className="absolute w-full h-full object-contain"
+                className="absolute w-full h-full object-contain object-left"
                 fill
               />
             </div>
