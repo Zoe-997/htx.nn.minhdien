@@ -14,7 +14,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={fontBase.className}>
+      <body className={`${fontBase.className} no-scrollbar`}>
         <Header />
         <main>{children}</main>
         <Footer />

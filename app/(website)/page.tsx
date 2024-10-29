@@ -18,9 +18,11 @@ export async function generateMetadata() {
 export default function Home() {
   return (
     <>
-      <BannerTop />
-      <Introduction />
-      <div className="py-20 bg-[#EDF8F0]">
+      {/* <BannerTop /> */}
+      <div id="about">
+        <Introduction />
+      </div>
+      <div className="py-20 bg-[#EDF8F0]" id="#our-works">
         <OurWorks />
       </div>
     </>

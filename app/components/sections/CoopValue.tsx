@@ -7,7 +7,7 @@ const CoopValue = () => {
       <h3 className="relative pt-2">
         <span className="absolute top-0 right-0 left-0 bg-[rgb(var(--color-link))] h-[2px] inline-block"></span>
         <span className="text-[rgb(rgb(var(--btn-bg)))] uppercase font-bold">
-          Corporate shared value
+          Giá trị chung của HTX
         </span>
       </h3>
       <div className="md:flex-1 pl-0 md:pl-[200px]">
@@ -21,13 +21,13 @@ const CoopValue = () => {
           />
           <Quote size={50} className="rotate-180 opacity-60 mb-8" />
           <blockquote className="mb-5 text-xl">
-            We believe that whatever we do must be good for Community, good for
-            Country, good for Climate, good for Customer – only then will it be
-            good for Company.
+            Chúng tôi tin rằng bất cứ điều gì chúng tôi làm đều phải tốt cho
+            Cộng đồng, tốt cho Đất nước, tốt cho Khí hậu, tốt cho Khách hàng –
+            chỉ khi đó mới tốt cho doanh nghiệp.
           </blockquote>
           <div className="flex items-center gap-1">
             <span className="bg-[rgb(var(--btn-text))] w-[15px] h-[1px] inline-block"></span>
-            MDC Chairman & Founder
+            Chủ Tịch kiêm Giám Đốc {process.env.NEXT_PUBLIC_STORE_NAME}
           </div>
         </div>
       </div>

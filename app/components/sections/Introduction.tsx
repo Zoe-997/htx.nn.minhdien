@@ -12,31 +12,32 @@ const Introduction = () => {
         <div className="flex flex-wrap gap-10">
           <div className="w-full md:w-4/12">
             <div className="mb-2">
-              <Tags title="Who we are" />
+              <Tags title="Chúng tôi là ai" />
             </div>
 
             <h2 className="text-2xl md:text-4xl">
-              Asian Agri is a palm oil company that places smallholder
-              partnerships at the heart of its day-to-day operations.
+              HTX Minh Diện là một HTX nông nghiệp coi trong phát triển bền vững
+              với các sản phẩm nông nghiệp đảm bảo tiêu chuẩn an toàn và thân
+              thiện với môi trường.
             </h2>
           </div>
           <div className="w-full md:flex-1 pl-0 md:pl-[100px]">
             <div>
               <p className="mb-4">
-                Asian Agri is one of the leading private companies in Indonesia,
-                producing crude palm oil through sustainably-managed
-                plantations.
+                HTX Minh Diện với tiền thân là những hộ nông dân nhỏ lẻ sản xuất
+                các sản phẩm nông nghiệp với kinh nghiệm được đúc kết qua nhiều
+                năm.
               </p>
               <p className="mb-4">
-                Established in 1979, Asian Agri has grown to become one of the
-                largest oil palm companies in Asia, managing 100,000 hectares of
-                oil palm plantations in North Sumatra, Riau and Jambi, supported
-                by a team of more than 22,000 employees.
+                Sau nhiều năm gắn bó với trồng trọt lương thực và hoa màu, chúng
+                tôi chính thức được thành lập vào năm 2023 với hy vọng phát
+                triển mô hình sản xuất kinh doanh từ nhỏ lẻ lên thành quy mô và
+                đạt chuẩn.
               </p>
               <p className="mb-4">
-                We plant, grow and process oil palms to produce sustainable
-                crude palm oil and crude palm kernel oil in technologically
-                advanced and energy self-sufficient mills.
+                Chúng tôi chuyên trồng trọt và chế biến lương thực, hoa màu theo
+                quy trình đã được chuẩn hóa với phương châm phát triển bền vững
+                và bảo vệ môi trường.
               </p>
             </div>
             <Button

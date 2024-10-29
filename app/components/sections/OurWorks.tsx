@@ -44,7 +44,7 @@ const OurWorks = () => {
       <Container>
         <div className="mb-2 flex flex-wrap items-center gap-2">
           <div className="flex-1">
-            <Tags title="What we do" />
+            <Tags title="Chúng tôi làm gì" />
           </div>
           <Button
             type="primary"
@@ -98,7 +98,7 @@ const OurWorks = () => {
                           />
                           <span className="bg-[rgb(var(--foreground-rgb))] w-full h-[1px] inline-block group-hover:bg-[rgb(var(--color-link))]"></span>
                         </span>
-                        <strong>Learn more</strong>
+                        <strong>Tìm hiểu thêm</strong>
                       </span>
                     </a>
                   </div>
