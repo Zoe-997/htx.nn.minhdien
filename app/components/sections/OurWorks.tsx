@@ -89,7 +89,10 @@ const OurWorks = () => {
                 <div className="flex flex-wrap gap-5 md:gap-10">
                   <div className="flex-1 order-2 md:order-1">
                     <div className="mb-10">{item?.content?.description}</div>
-                    <a href="#" className="inline-block group">
+                    <a
+                      href={`/blogs/${item?.content?.collection.handle}/${item?.content?.handle}`}
+                      className="inline-block group"
+                    >
                       <span className="flex flex-wrap gap-2 items-center">
                         <span className="relative flex items-center w-[25px]">
                           <ChevronRight

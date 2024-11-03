@@ -9,17 +9,17 @@ import Newsletter from "@/app/components/commons/Newsletter";
 
 const Footer = () => {
   const categories = [
-    { label: "Food", href: "#" },
-    { label: "Vegetables", href: "#" },
-    { label: "Agricultural Machinery", href: "#" },
+    { label: "Lương thực", href: "#" },
+    { label: "Hoa màu", href: "#" },
+    { label: "Dịch vụ", href: "#" },
   ];
 
   const information = [
-    { label: "Blog", href: "#" },
-    { label: "About Us", href: "#" },
-    { label: "Shipping Policy", href: "#" },
-    { label: "Payment Policy", href: "#" },
-    { label: "Refund Policy", href: "#" },
+    { label: "Tin tức", href: "#" },
+    { label: "Về chúng tôi", href: "#" },
+    { label: "Chính sách vận chuyển", href: "#" },
+    { label: "Chính sách thanh toán", href: "#" },
+    { label: "Chính sách hoàn tiền", href: "#" },
   ];
 
   return (
@@ -57,8 +57,8 @@ const Footer = () => {
         <div className="h-[1px] bg-[rgba(225,_225,_225,_.3)] my-5"></div>
 
         <div className="text-center">
-          ©{new Date().getFullYear()} {process.env.NEXT_PUBLIC_STORE_NAME}{" "}
-          Store. All Rights Reserved.
+          ©{new Date().getFullYear()} bản quyền thuộc{" "}
+          {process.env.NEXT_PUBLIC_STORE_NAME}.
         </div>
       </Container>
     </div>

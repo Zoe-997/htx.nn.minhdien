@@ -26,6 +26,10 @@
   --menu-color: 225 225 225;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-size: medium;
 }

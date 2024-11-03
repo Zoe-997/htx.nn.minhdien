@@ -24,8 +24,8 @@ const Newsletter: React.FC = () => {
         <FooterTitle title="NEWSLETTER" />
       </div>
       <p className="mb-3">
-        Enter your email address to get $10 off your first order and free
-        shipping. Updates information on Sales and Offers.
+        Đăng ký với email của bạn để được giảm giá cho đơn hàng đầu tiên và miễn
+        phí ship cũng như cập nhật thông tin về sự kiện và ưu đãi.
       </p>
       <Form
         name="basic"
@@ -37,17 +37,17 @@ const Newsletter: React.FC = () => {
         <Form.Item<FieldType>
           name="email"
           rules={[
-            { required: true, message: "Please input your username!" },
+            { required: true, message: "Vui lòng điền email!" },
             { type: "email" },
           ]}
           className="w-full flex-1"
         >
-          <Input className="rounded-full" placeholder="Your email address" />
+          <Input className="rounded-full" placeholder="Email" />
         </Form.Item>
 
         <Form.Item>
           <Button htmlType="submit" className="rounded-full bg-white">
-            Subscibe
+            Đăng ký
           </Button>
         </Form.Item>
       </Form>

@@ -1,21 +1,25 @@
+"use client";
 import { Button } from "antd";
-import { ChevronRight } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 import Container from "@/app/components/commons/Container";
 import CoopValue from "@/app/components/sections/CoopValue";
 import Tags from "../commons/Tags";
+import ButtonIcon from "../commons/ButtonIcon";
 
 const Introduction = () => {
+  const router = useRouter();
+
   return (
     <div className="my-10">
       <Container>
-        <div className="flex flex-wrap gap-10">
+        <div className="flex flex-wrap gap-10 pb-20">
           <div className="w-full md:w-4/12">
             <div className="mb-2">
               <Tags title="Chúng tôi là ai" />
             </div>
 
-            <h2 className="text-2xl md:text-4xl">
+            <h2 className="text-2xl md:text-3xl">
               HTX Minh Diện là một HTX nông nghiệp coi trong phát triển bền vững
               với các sản phẩm nông nghiệp đảm bảo tiêu chuẩn an toàn và thân
               thiện với môi trường.
@@ -43,20 +47,15 @@ const Introduction = () => {
             <Button
               type="primary"
               className="mt-5 rounded-full px-5 py-5 gap-3 group"
+              onClick={() => router.push("/about")}
             >
-              <div className="relative flex items-center">
-                <ChevronRight
-                  size={15}
-                  className="absolute top-[calc(50%+0.5px)] left-[0] opacity-0 -translate-y-[50%] transition-all duration-500 group-hover:opacity-100 group-hover:left-[15px]"
-                />
-                <span className="bg-white w-[25px] h-[1px] inline-block"></span>
-              </div>
+              <ButtonIcon />
               <span>About us</span>
             </Button>
           </div>
         </div>
 
-        <div className="mt-20">
+        <div className="pt-20">
           <CoopValue />
         </div>
       </Container>

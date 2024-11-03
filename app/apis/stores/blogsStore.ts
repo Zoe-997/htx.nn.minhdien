@@ -15,7 +15,7 @@ export const useBlogsStore = create<BlogsStore>((set) => ({
   getAllBlogs: async (query, onSuccess, onFail) => {
     try {
       set({ loading: true });
-      const response = await RepositoryRemote.blogs.getAllBlogs(query);
+      const response = await RepositoryRemote.blogs.getAllBlogs(query ?? "");
       onSuccess?.(response?.data);
     } catch (error) {
       onFail?.(error);

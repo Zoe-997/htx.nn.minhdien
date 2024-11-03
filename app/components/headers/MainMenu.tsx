@@ -23,8 +23,8 @@ const MainMenu = () => {
             key={index}
             className={`text-lg ${
               pathname === item.path
-                ? "text-[rgb(var(--color-link))]"
-                : "text-[rgb(var(--menu-color))]"
+                ? "text-[rgb(var(--color-link)_100%)]"
+                : "text-[rgb(var(--menu-color)_100%)]"
             }`}
           >
             <Link href={item.path}>{item.title}</Link>
